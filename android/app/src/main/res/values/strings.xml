@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">حاسبة الأرباح</string>
+    <string name="title">حاسبة الأرباح</string>
+    <string name="subtitle">احسب صافي الربح أو الخسارة لحظياً</string>
+    <string name="last_amount_label">المبلغ الأخير</string>
+    <string name="capital_say_label">كابيتال say</string>
+    <string name="month_profits_label">أرباح الشهر</string>
+    <string name="result_label">النتيجة (الربح أو الخسارة)</string>
+    <string name="enter_amounts_hint">أدخل المبالغ للحساب</string>
+    <string name="profit_status">صافي ربح 🎉</string>
+    <string name="loss_status">صافي خسارة ⚠️</string>
+    <string name="break_even_status">نقطة التعادل (صفر)</string>
+    <string name="btn_clear">مسح الحقول</string>
+    <string name="formula_hint">المعادلة = المبلغ الأخير - كابيتال say - أرباح الشهر</string>
+</resources>
