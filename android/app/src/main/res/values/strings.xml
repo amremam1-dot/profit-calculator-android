@@ -1,15 +1,29 @@
 <resources>
     <string name="app_name">حاسبة الأرباح</string>
     <string name="title">حاسبة الأرباح</string>
-    <string name="subtitle">احسب صافي الربح أو الخسارة لحظياً</string>
+    <string name="subtitle">احسب صافي الأرباح مع عمليتين مستقلتين وسجل</string>
+    
+    <string name="tab_op1">العملية 1</string>
+    <string name="tab_op2">العملية 2</string>
+
     <string name="last_amount_label">المبلغ الأخير</string>
     <string name="capital_say_label">كابيتال say</string>
     <string name="month_profits_label">أرباح الشهر</string>
-    <string name="result_label">النتيجة (الربح أو الخسارة)</string>
+    
+    <string name="result_label">النتيجة (اضغط للنسخ)</string>
     <string name="enter_amounts_hint">أدخل المبالغ للحساب</string>
     <string name="profit_status">صافي ربح 🎉</string>
     <string name="loss_status">صافي خسارة ⚠️</string>
     <string name="break_even_status">نقطة التعادل (صفر)</string>
-    <string name="btn_clear">مسح الحقول</string>
-    <string name="formula_hint">المعادلة = المبلغ الأخير - كابيتال say - أرباح الشهر</string>
+    
+    <string name="btn_save_history">حفظ في السجل 💾</string>
+    <string name="btn_clear">مسح الحقول 🗑️</string>
+    
+    <string name="history_title">سجل العمليات السابقة 📜</string>
+    <string name="btn_clear_history">مسح السجل</string>
+    <string name="no_history_hint">لا توجد عمليات مسجلة حتى الآن</string>
+    
+    <string name="copied_toast">تم نسخ النتيجة إلى الحافظة! 📋</string>
+    <string name="history_saved_toast">تم حفظ العملية في السجل بنجاح! ✅</string>
+    <string name="formula_hint">المعادلة: المبلغ الأخير - كابيتال say - أرباح الشهر</string>
 </resources>

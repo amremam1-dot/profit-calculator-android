@@ -8,6 +8,7 @@
   <style>
     :root {
       --primary: #2563eb;
+      --primary-hover: #1d4ed8;
       --bg: #0f172a;
       --card-bg: #1e293b;
       --input-bg: #334155;
@@ -38,55 +39,76 @@
     .calculator-card {
       background-color: var(--card-bg);
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       border-radius: 24px;
-      padding: 28px 24px;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+      padding: 24px 20px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .header h1 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: #60a5fa;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .header p {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
     }
 
+    .tabs {
+      display: flex;
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: #2563eb;
+      color: #fff;
+    }
+
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .form-group label {
       display: block;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #cbd5e1;
-    }
-
-    .input-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
     }
 
     .input-wrapper input {
       width: 100%;
       background-color: var(--input-bg);
       border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 16px;
-      font-size: 1.2rem;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 1.15rem;
       font-weight: bold;
       color: #ffffff;
       outline: none;
@@ -101,97 +123,141 @@
       box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
     }
 
-    .input-wrapper input::placeholder {
-      color: #64748b;
-      font-weight: normal;
+    .result-box {
+      margin-top: 16px;
+      background: #0f172a;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
     }
 
-    .result-box {
-      margin-top: 24px;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border: 2px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
-      text-align: center;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    .result-box:hover {
+      border-color: #60a5fa;
     }
 
     .result-box.profit {
       border-color: var(--success);
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(15, 23, 42, 0.8));
+      background: rgba(34, 197, 94, 0.1);
     }
 
     .result-box.loss {
       border-color: var(--danger);
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(15, 23, 42, 0.8));
+      background: rgba(239, 68, 68, 0.1);
     }
 
     .result-title {
-      font-size: 0.95rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 6px;
     }
 
     .result-status {
-      font-size: 1.15rem;
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-top: 2px;
     }
 
     .result-amount {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
       direction: ltr;
       display: inline-block;
+      margin-top: 4px;
     }
 
-    .profit .result-status, .profit .result-amount {
-      color: var(--success);
-    }
-
-    .loss .result-status, .loss .result-amount {
-      color: var(--danger);
-    }
-
-    .neutral .result-amount {
-      color: #f8fafc;
-    }
+    .profit .result-status, .profit .result-amount { color: var(--success); }
+    .loss .result-status, .loss .result-amount { color: var(--danger); }
+    .neutral .result-amount { color: #f8fafc; }
 
     .action-buttons {
       display: flex;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 14px;
     }
 
     .btn {
       flex: 1;
-      padding: 13px;
-      border-radius: 14px;
+      padding: 11px;
+      border-radius: 10px;
       border: none;
-      font-size: 1rem;
+      font-size: 0.92rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
     }
 
+    .btn-save {
+      background-color: #2563eb;
+      color: #fff;
+    }
+    .btn-save:hover { background-color: #1d4ed8; }
+
     .btn-reset {
       background-color: #334155;
       color: #cbd5e1;
     }
+    .btn-reset:hover { background-color: #475569; }
 
-    .btn-reset:hover {
-      background-color: #475569;
-      color: #fff;
+    .history-card {
+      margin-top: 16px;
+      background: #0f172a;
+      border-radius: 14px;
+      padding: 14px;
+      border: 1px solid var(--border);
     }
 
-    .formula-badge {
-      text-align: center;
-      margin-top: 18px;
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .history-header h3 {
+      font-size: 0.88rem;
+      color: #93c5fd;
+    }
+
+    .clear-history-btn {
+      background: none;
+      border: none;
+      color: var(--danger);
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .history-list {
+      max-height: 140px;
+      overflow-y: auto;
       font-size: 0.78rem;
-      color: #64748b;
-      direction: rtl;
     }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer;
+    }
+    .history-item:hover { background: rgba(255,255,255,0.04); }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      background: #334155;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .toast.show { opacity: 1; }
   </style>
 </head>
 <body>
@@ -199,79 +265,126 @@
   <div class="calculator-card">
     <div class="header">
       <h1>حاسبة الأرباح</h1>
-      <p>احسب صافي الربح أو الخسارة لحظياً</p>
+      <p>عمليتين مستقلتين مع حفظ دائم وسجل</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tab0" onclick="switchTab(0)">العملية 1</button>
+      <button class="tab-btn" id="tab1" onclick="switchTab(1)">العملية 2</button>
     </div>
 
     <div class="form-group">
       <label for="lastAmount">المبلغ الأخير</label>
       <div class="input-wrapper">
-        <input type="number" id="lastAmount" inputmode="decimal" placeholder="0.00" oninput="calculate()">
+        <input type="number" id="lastAmount" inputmode="decimal" placeholder="0.00" oninput="onDataChanged()">
       </div>
     </div>
 
     <div class="form-group">
       <label for="capitalSay">كابيتال say</label>
       <div class="input-wrapper">
-        <input type="number" id="capitalSay" inputmode="decimal" placeholder="0.00" oninput="calculate()">
+        <input type="number" id="capitalSay" inputmode="decimal" placeholder="0.00" oninput="onDataChanged()">
       </div>
     </div>
 
     <div class="form-group">
       <label for="monthProfits">أرباح الشهر</label>
       <div class="input-wrapper">
-        <input type="number" id="monthProfits" inputmode="decimal" placeholder="0.00" oninput="calculate()">
+        <input type="number" id="monthProfits" inputmode="decimal" placeholder="0.00" oninput="onDataChanged()">
       </div>
     </div>
 
-    <div class="result-box neutral" id="resultContainer">
-      <div class="result-title">النتيجة (الربح أو الخسارة)</div>
-      <div class="result-status" id="resultStatus">أدخل الأرقام للحساب اللحظي</div>
+    <!-- Result -->
+    <div class="result-box neutral" id="resultContainer" onclick="copyResult()" title="اضغط لنسخ النتيجة">
+      <div class="result-title">النتيجة (اضغط للنسخ) 📋</div>
+      <div class="result-status" id="resultStatus">أدخل الأرقام للحساب</div>
       <div class="result-amount" id="resultValue">0.00</div>
     </div>
 
     <div class="action-buttons">
-      <button class="btn btn-reset" onclick="resetForm()">مسح الحقول</button>
+      <button class="btn btn-save" onclick="saveToHistory()">حفظ في السجل 💾</button>
+      <button class="btn btn-reset" onclick="resetForm()">مسح الحقول 🗑️</button>
     </div>
 
-    <div class="formula-badge">
-      المعادلة: المبلغ الأخير - كابيتال say - أرباح الشهر
+    <!-- History -->
+    <div class="history-card">
+      <div class="history-header">
+        <h3>سجل العمليات 📜</h3>
+        <button class="clear-history-btn" onclick="clearHistory()">مسح السجل</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div style="text-align:center; color: var(--text-muted); padding: 8px;">لا توجد عمليات مسجلة</div>
+      </div>
     </div>
   </div>
 
-  <script>
-    function calculate() {
-      const lastAmountVal = document.getElementById('lastAmount').value.trim();
-      const capitalSayVal = document.getElementById('capitalSay').value.trim();
-      const monthProfitsVal = document.getElementById('monthProfits').value.trim();
+  <div id="toast" class="toast">تم النسخ إلى الحافظة! 📋</div>
 
-      const lastAmount = parseFloat(lastAmountVal) || 0;
-      const capitalSay = parseFloat(capitalSayVal) || 0;
-      const monthProfits = parseFloat(monthProfitsVal) || 0;
+  <script>
+    let currentTab = 0;
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function switchTab(tabIndex) {
+      saveTabState();
+      currentTab = tabIndex;
+      document.getElementById('tab0').className = tabIndex === 0 ? 'tab-btn active' : 'tab-btn';
+      document.getElementById('tab1').className = tabIndex === 1 ? 'tab-btn active' : 'tab-btn';
+      loadTabState();
+    }
+
+    function saveTabState() {
+      localStorage.setItem(`tab_${currentTab}_last`, document.getElementById('lastAmount').value);
+      localStorage.setItem(`tab_${currentTab}_capital`, document.getElementById('capitalSay').value);
+      localStorage.setItem(`tab_${currentTab}_month`, document.getElementById('monthProfits').value);
+    }
+
+    function loadTabState() {
+      document.getElementById('lastAmount').value = localStorage.getItem(`tab_${currentTab}_last`) || '';
+      document.getElementById('capitalSay').value = localStorage.getItem(`tab_${currentTab}_capital`) || '';
+      document.getElementById('monthProfits').value = localStorage.getItem(`tab_${currentTab}_month`) || '';
+      calculate();
+    }
+
+    function onDataChanged() {
+      saveTabState();
+      calculate();
+    }
+
+    function calculate() {
+      const last = parseFloat(document.getElementById('lastAmount').value) || 0;
+      const cap = parseFloat(document.getElementById('capitalSay').value) || 0;
+      const mon = parseFloat(document.getElementById('monthProfits').value) || 0;
+
+      const hasVal = document.getElementById('lastAmount').value || 
+                     document.getElementById('capitalSay').value || 
+                     document.getElementById('monthProfits').value;
 
       const container = document.getElementById('resultContainer');
       const statusEl = document.getElementById('resultStatus');
       const valEl = document.getElementById('resultValue');
 
-      if (!lastAmountVal && !capitalSayVal && !monthProfitsVal) {
+      if (!hasVal) {
         container.className = 'result-box neutral';
-        statusEl.textContent = 'أدخل الأرقام للحساب اللحظي';
+        statusEl.textContent = 'أدخل الأرقام للحساب';
         valEl.textContent = '0.00';
         return;
       }
 
-      // المعادلة: المبلغ الأخير - كابيتال say - أرباح الشهر
-      const result = lastAmount - capitalSay - monthProfits;
+      const res = last - cap - mon;
+      const formatted = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.abs(res));
 
-      const formatted = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }).format(Math.abs(result));
-
-      if (result > 0) {
+      if (res > 0) {
         container.className = 'result-box profit';
         statusEl.textContent = 'صافي ربح 🎉';
         valEl.textContent = '+' + formatted;
-      } else if (result < 0) {
+      } else if (res < 0) {
         container.className = 'result-box loss';
         statusEl.textContent = 'صافي خسارة ⚠️';
         valEl.textContent = '-' + formatted;
@@ -282,13 +395,79 @@
       }
     }
 
+    function copyResult() {
+      const val = document.getElementById('resultValue').textContent;
+      navigator.clipboard.writeText(val);
+      showToast('تم نسخ النتيجة: ' + val + ' 📋');
+    }
+
     function resetForm() {
       document.getElementById('lastAmount').value = '';
       document.getElementById('capitalSay').value = '';
       document.getElementById('monthProfits').value = '';
+      saveTabState();
       calculate();
       document.getElementById('lastAmount').focus();
     }
+
+    function saveToHistory() {
+      const l = document.getElementById('lastAmount').value;
+      const c = document.getElementById('capitalSay').value;
+      const m = document.getElementById('monthProfits').value;
+      const r = document.getElementById('resultValue').textContent;
+
+      if (!l && !c && !m) {
+        showToast('يرجى إدخال قيم لحفظها');
+        return;
+      }
+
+      const history = JSON.parse(localStorage.getItem('calc_history') || '[]');
+      const item = {
+        tab: currentTab === 0 ? 'العملية 1' : 'العملية 2',
+        last: l || '0',
+        cap: c || '0',
+        mon: m || '0',
+        res: r,
+        date: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+      };
+      history.unshift(item);
+      if (history.length > 20) history.pop();
+      localStorage.setItem('calc_history', JSON.stringify(history));
+      renderHistory();
+      showToast('تم حفظ العملية في السجل 💾');
+    }
+
+    function renderHistory() {
+      const history = JSON.parse(localStorage.getItem('calc_history') || '[]');
+      const listEl = document.getElementById('historyList');
+
+      if (history.length === 0) {
+        listEl.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding: 8px;">لا توجد عمليات مسجلة</div>';
+        return;
+      }
+
+      listEl.innerHTML = history.map(item => `
+        <div class="history-item" onclick="navigator.clipboard.writeText('${item.res}'); showToast('تم نسخ: ${item.res}');">
+          <div>
+            <span style="color:#93c5fd; font-weight:bold;">[${item.tab}]</span> ${item.date}
+            <div style="color:var(--text-muted); font-size:0.7rem;">المبلغ: ${item.last} | كابيتال: ${item.cap} | شهر: ${item.mon}</div>
+          </div>
+          <div style="font-weight:bold; font-size:0.95rem; color:${item.res.startsWith('+') ? '#22c55e' : item.res.startsWith('-') ? '#ef4444' : '#fff'}; direction:ltr;">
+            ${item.res}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function clearHistory() {
+      localStorage.removeItem('calc_history');
+      renderHistory();
+      showToast('تم مسح السجل');
+    }
+
+    // Init
+    loadTabState();
+    renderHistory();
   </script>
 </body>
 </html>
